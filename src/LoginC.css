@@ -1,0 +1,63 @@
+.Main{
+    max-width: 1500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-image: url(https://c7.alamy.com/comp/2AKWBMK/abstract-dotted-light-green-background-with-striped-texture-seamless-creative-technology-halftone-pattern-illustration-on-white-background-2AKWBMK.jpg);
+}
+.Title{
+    font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-size: clamp(1.5rem,3.5vw,3.2rem);
+  font-weight: 800;
+  font-style: normal;
+}
+.Butt{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 97%;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px;
+    
+}
+.btn{
+    font-size: clamp(1.5rem,3.5vw,3.2rem);
+}
+
+.icons{
+    padding: 0 5px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orSecticon{
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.orSecticon .line
+{
+    width: 100%;
+    height: 1.5px;
+    content: '';
+    background-color: #aaaaaa;
+
+}
+.orSecticon .tt{
+    font-size: 15px;
+}
+
+@media (max-width: 415px) {
+    
+}
