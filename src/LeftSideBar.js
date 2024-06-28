@@ -1,4 +1,4 @@
-import { Box, Checkbox, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, FormControl, Grid, InputLabel, ListItemText, Menu, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
@@ -10,6 +10,7 @@ import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
+// import data from './data.json';
 
 function LeftSideBar() {
     const [activeButton, setActiveButton] = useState(null);
@@ -18,10 +19,37 @@ function LeftSideBar() {
     const [anchorElP, setAnchorElP] = useState(null);
     const [anchorElS, setAnchorElS] = useState(null);
 
+
+    const [roleFilter, setRoleFilter] = useState([]);
+    const [open, setOpen] = useState(false);
+
+    const handleRoleChange = (event) => {
+      setRoleFilter(event.target.value);
+    };
+
+    // const [items, setItems] = useState(data);
+
+    // const handleAddItem = (item) => {
+    //   setItems([...items, item]);
+    // };
+
+  const roles = ['ABC', 'LMN', 'XYZ'];
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClosePop = () => {
+    setOpen(false);
+  };
+
   const [selectedAssociates, setSelectedAssociates] = useState({});
   const [selectedTags, setSelectedTags] = useState({});
   const [selectedPriority, setSelectedPriority] = useState({});
   const [selectedStatus, setSelectedStatus] = useState({});
+
+
 
 
 
@@ -236,7 +264,7 @@ function LeftSideBar() {
 
         <Box sx={{display:'flex',flexDirection:'column', padding:'15px'}}>
 
-            <Box sx={{width:'280px', height: '40px',display:'flex',flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+            <Box onClick={handleClickOpen} sx={{width:'280px', height: '40px',display:'flex',flexDirection:'row', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
                 <Typography sx={{fontSize: '12px', fontFamily:'Montserrat',color:'#9F9F9F'}}>Campaigns List</Typography>
                 <AddBoxOutlinedIcon sx={{height:'16px', width:'16px', color:'#9F9F9F'}}/>
 
@@ -792,11 +820,93 @@ function LeftSideBar() {
         ))}
       </Menu>
 
-            
 
+      <Dialog
+      anchor="right" 
+      BackdropProps={{
+        style: {
+          backgroundColor: 'transparent',
+          boxShadow: 'none'
+        },
+      }}
+      sx={{
+            // maxWidth:'205px',
+            // width:'205px',
+          '& .MuiDialog-paper': {
+            right: 190,
+            top: 30,
+            left: 'auto !important',
+            boxShadow:'none',
+            minWidth:'398px', maxWidth:'398px', minHeight:'257px', maxHeight:'257px', padding:'10px 15px',display: 'flex', flexDirection:'column',gap: 2, border: '1px solid #9F9F9F', borderRadius:'5px', alignItems:'center',justifyContent:'center'
+          },}}
+       open={open} onClose={handleClosePop}>
+        
+        <FormControl size='samll' sx={{width:'345px',display: 'flex', flexDirection:'column',gap: 2, 
+          boxShadow: 'none', borderRadius:'5px'}}>
+          <Box sx={{display:'flex', flexDirection:'column', gap: '11px'}}>
+          <Typography sx={{fontSize: '14px', fontFamily:'Montserrat', color:'#474747'}}> Campaign / Project Name </Typography>
+          {/* <TextField sx={{border: 0, height:'40px'}} id="filled-basic" label="Type Campaign Name" variant="filled" /> */}
+          <Box sx={{backgroundColor: '#F3F3F3',
+                    opacity: '100%',
+                    padding:1}}>
+          <input
+                  placeholder='Type Campaign Name'
+                  style={{
+                    width: '100%',
+                    
+                    outline: 0,
+                    border: 'none',
+                    backgroundColor: '#F3F3F3',
+                    textAlign: 'left',
+                    fontSize: 14,
+                    color: '#474747',
+                    padding: '0px',
+                    fontFamily:'Montserrat'
+                    // opacity: 0.54,
+                  }}
+                  
+                />
+          </Box>
+          </Box>
 
+          <Box sx={{display:'flex', flexDirection:'column', gap: '11px'}}>
+          
+          <Typography sx={{fontSize: '14px', fontFamily:'Montserrat', color:'#474747'}}>Client / Company</Typography>
+          <FormControl sx={{height: '40px', }} size="small">
+                <InputLabel sx={{fontFamily: 'Montserrat',fontSize: "14px", textAlign:"left" , color: "#474747"}}>Select Company (Internal by default)</InputLabel>
+                <Select
+                  sx={{borderRadius: '5px', backgroundColor: "#F3F3F3", height: '40px'}}
+                  multiple
+                  value={roleFilter}
+                  onChange={handleRoleChange}
+                  input={<OutlinedInput label="Select Company (Internal by default)" />}
+                  renderValue={(selected) => selected.join(', ')}
+                  // MenuProps={MenuProps}
+                >
+                  {roles.map((role) => (
+                    <MenuItem sx={{padding:"3px"}} key={role} value={role}>
+                      <Checkbox checked={roleFilter.indexOf(role) > -1} />
+                      <ListItemText primary={role} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              </Box>
+              <Box sx={{display:'flex', flexDirection:'row', gap:2}}>
+                <Button onClick={handleClosePop} variant="contained" sx={{backgroundColor: "#0058FF", width: '68px',height: '34px'}}>
+                  Add
+                </Button>
+                <Button onClick={handleClosePop} color="primary">
+                  Cancel
+                </Button>
+              </Box>
 
+        </FormControl>
 
+        
+      </Dialog>
+
+  
     </Box>
   )
 }
