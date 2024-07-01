@@ -461,7 +461,7 @@ function LeftSideBar() {
                   <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedAssociates.length}</Typography>
                 </Box>
 
-                 ||<ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} /> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                 ||<ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} /> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>{selectedAssociates.length}</Typography>}
 
             </Box>
 
@@ -498,7 +498,7 @@ function LeftSideBar() {
                 <Box sx={{height:'20px',width: '20px', borderRadius:'50%', backgroundColor:'#F84F4F',color:'#ffffff', textAlign:'center', display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedTags.length}</Typography>
                 </Box> 
-                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>{selectedTags.length}</Typography>}
 
 
             </Box>
@@ -538,7 +538,7 @@ function LeftSideBar() {
                 <Box sx={{height:'20px',width: '20px', borderRadius:'50%', backgroundColor:'#F84F4F',color:'#ffffff', textAlign:'center', display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedPriority.length}</Typography>
                 </Box> 
-                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>{selectedPriority.length}</Typography>}
 
             </Box>
 
@@ -576,7 +576,7 @@ function LeftSideBar() {
                 <Box sx={{height:'20px',width: '20px', borderRadius:'50%', backgroundColor:'#F84F4F',color:'#ffffff', textAlign:'center', display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedStatus.length}</Typography>
                 </Box>  
-                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>{selectedStatus.length}</Typography>}
 
             </Box>
 
@@ -694,22 +694,17 @@ function LeftSideBar() {
       <Menu
         id="simple-menu"
         anchorElT={anchorElT}
-        keepMounted
         open={Boolean(anchorElT)}
         onClose={handleClose}
         sx={{
-            
-            width: '205px',
             left: 300,
-            top: 'calc(30% + 1px)',
-            position: 'absolute',
-            right: 'auto !important',
-            transition: 'visibility 0s linear 25ms,z-index 0s linear 25ms,opacity 334ms cubic-bezier(0,0,.2,1),25ms',
-            visibility: 'visible',
+            
             
           '& .MuiMenu-paper': {
             boxShadow: '0px 0px 6px #00000029',
             borderRadius: '5px',
+            backgroundColor: '#F9F9F9'
+
           },
           
         }}
@@ -753,6 +748,8 @@ function LeftSideBar() {
           '& .MuiMenu-paper': {
             boxShadow: '0px 0px 6px #00000029',
             borderRadius: '5px',
+            backgroundColor: '#F9F9F9'
+
           },
           
         
@@ -799,6 +796,8 @@ function LeftSideBar() {
           '& .MuiMenu-paper': {
             boxShadow: '0px 0px 6px #00000029',
             borderRadius: '5px',
+            backgroundColor: '#F9F9F9'
+
           },
         }}
       >
