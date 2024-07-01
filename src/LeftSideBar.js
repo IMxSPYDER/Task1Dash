@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Drawer, FormControl, Grid, InputLabel, ListItemText, Menu, MenuItem, OutlinedInput, Select, TextField, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Dialog, FormControl, InputLabel, ListItemText, Menu, MenuItem, OutlinedInput, Select, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
@@ -10,7 +10,6 @@ import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import ArrowLeftOutlinedIcon from '@mui/icons-material/ArrowLeftOutlined';
-// import data from './data.json';
 
 function LeftSideBar() {
     const [activeButton, setActiveButton] = useState(null);
@@ -27,11 +26,7 @@ function LeftSideBar() {
       setRoleFilter(event.target.value);
     };
 
-    // const [items, setItems] = useState(data);
-
-    // const handleAddItem = (item) => {
-    //   setItems([...items, item]);
-    // };
+   
 
   const roles = ['ABC', 'LMN', 'XYZ'];
 
@@ -44,10 +39,10 @@ function LeftSideBar() {
     setOpen(false);
   };
 
-  const [selectedAssociates, setSelectedAssociates] = useState({});
-  const [selectedTags, setSelectedTags] = useState({});
-  const [selectedPriority, setSelectedPriority] = useState({});
-  const [selectedStatus, setSelectedStatus] = useState({});
+  const [selectedAssociates, setSelectedAssociates] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedPriority, setSelectedPriority] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState([]);
 
 
 
@@ -87,33 +82,6 @@ function LeftSideBar() {
 
   };
 
-  const handleSelectA = (associate) => {
-    setSelectedAssociates((prevAssociates) => ({
-      ...prevAssociates,
-      [associate]: !prevAssociates[associate],
-    }));
-  };
-
-  const handleSelectT = (tags) => {
-    setSelectedTags((prevTags) => ({
-        ...prevTags,
-        [tags]: !prevTags[tags]
-    }));
-  };
-
-  const handleSelectP = (priority) => {
-    setSelectedPriority((prevPriority) => ({
-        ...prevPriority,
-        [priority]: !prevPriority[priority]
-    }));
-  }
-
-  const handleSelectS = (status) => {
-    setSelectedStatus((prevStatus) => ({
-        ...prevStatus,
-        [status]: !prevStatus[status]
-    }));
-  }
 
   console.log(selectedAssociates)
   console.log(selectedTags)
@@ -152,8 +120,54 @@ function LeftSideBar() {
     setActiveButton(buttonId);
   };
 
+ 
+
+  const handleCheckboxChangeA = (event, associateId) => {
+    if (event.target.checked) {
+      setSelectedAssociates([...selectedAssociates, associateId]);
+    } else {
+      setSelectedAssociates(
+        selectedAssociates.filter((id) => id !== associateId),
+      );
+    }
+  };
+
+  
+  const handleCheckboxChangeT = (event, tagsId) => {
+    if (event.target.checked) {
+      setSelectedTags([...selectedTags, tagsId]);
+    } else {
+      setSelectedTags(
+        selectedTags.filter((id) => id !== tagsId),
+      );
+    }
+  };
+
+
+  
+  const handleCheckboxChangeP = (event, priorityId) => {
+    if (event.target.checked) {
+      setSelectedPriority([...selectedPriority, priorityId]);
+    } else {
+      setSelectedPriority(
+        selectedPriority.filter((id) => id !== priorityId),
+      );
+    }
+  };
+
+  
+  const handleCheckboxChangeS = (event, statusId) => {
+    if (event.target.checked) {
+      setSelectedStatus([...selectedStatus, statusId]);
+    } else {
+      setSelectedStatus(
+        selectedStatus.filter((id) => id !== statusId),
+      );
+    }
+  };
+
   return (
-    <Box sx={{maxWidth:'314px', minWidth: '314px', maxHeight:'1080px',minHeight:'1080px', backgroundColor:'#ECF1FE',
+    <Box sx={{maxWidth:'314px', minWidth: '314px', backgroundColor:'#ECF1FE',
     display:'flex', flexDirection:'column'}}>
 
         <Box sx={{display:'flex',flexDirection:'column', padding:'15px'}}>
@@ -181,8 +195,6 @@ function LeftSideBar() {
             </Box>
 
             <Box sx={{width:'20%',display:'flex',alignItems:'center', justifyContent:'center'}}>
-
-                {/* <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>{activeButton === 'today'? '...' : '2'}</Typography> */}
 
                 {(activeButton === 'today') ? <MoreHorizOutlinedIcon sx={{height:'16px', width:'16px', color:'#474747'}}/> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>2</Typography>}
 
@@ -425,6 +437,7 @@ function LeftSideBar() {
                 backgroundColor: '#F9F9F9'
                 },
                 '&.active': {
+                color: '#0058FF',
                 backgroundColor: '#FFFFFF',
                 '& > :last-child': {
                     content: '"..."'
@@ -443,7 +456,12 @@ function LeftSideBar() {
 
             <Box sx={{width:'20%',display:'flex',alignItems:'center', justifyContent:'center'}}>
 
-                {(activeButton === 'Associates') ? <MoreHorizOutlinedIcon sx={{height:'16px', width:'16px', color:'#474747'}}/> ||<ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} /> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                {(activeButton === 'Associates') ?
+                <Box sx={{height:'20px',width: '20px', borderRadius:'50%', backgroundColor:'#F84F4F',color:'#ffffff', textAlign:'center', display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedAssociates.length}</Typography>
+                </Box>
+
+                 ||<ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} /> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
 
             </Box>
 
@@ -460,6 +478,7 @@ function LeftSideBar() {
                 backgroundColor: '#F9F9F9'
                 },
                 '&.active': {
+                color: '#0058FF',
                 backgroundColor: '#FFFFFF',
                 '& > :last-child': {
                     content: '"..."'
@@ -467,7 +486,6 @@ function LeftSideBar() {
                 }
             }}
             className={activeButton === 'Tags'? 'active' : ''}
-            // onClick={() => handleButtonClick('Tags')}
             onClick={handleClickT}>
 
             <Box sx={{width:'80%',display:'flex',flexDirection:'row', gap:3,alignItems:'center',justifyContent:'flex-start',marginLeft:'12px'}}>
@@ -476,7 +494,11 @@ function LeftSideBar() {
             </Box>
             <Box sx={{width:'20%',display:'flex',alignItems:'center', justifyContent:'center'}}>
 
-                {(activeButton === 'Tags') ? <MoreHorizOutlinedIcon sx={{height:'16px', width:'16px', color:'#474747'}}/> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                {(activeButton === 'Tags') ? 
+                <Box sx={{height:'20px',width: '20px', borderRadius:'50%', backgroundColor:'#F84F4F',color:'#ffffff', textAlign:'center', display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedTags.length}</Typography>
+                </Box> 
+                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
 
 
             </Box>
@@ -494,6 +516,7 @@ function LeftSideBar() {
                 backgroundColor: '#F9F9F9'
                 },
                 '&.active': {
+                color: '#0058FF',
                 backgroundColor: '#FFFFFF',
                 '& > :last-child': {
                     content: '"..."'
@@ -501,7 +524,6 @@ function LeftSideBar() {
                 }
             }}
             className={activeButton === 'Priority'? 'active' : ''}
-            // onClick={() => handleButtonClick('Priority')}
             onClick={handleClickP}
             >
 
@@ -512,7 +534,11 @@ function LeftSideBar() {
             <Box sx={{width:'20%',display:'flex',alignItems:'center', justifyContent:'center'}}>
 
 
-                {(activeButton === 'Priority') ? <MoreHorizOutlinedIcon sx={{height:'16px', width:'16px', color:'#474747'}}/> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                {(activeButton === 'Priority') ? 
+                <Box sx={{height:'20px',width: '20px', borderRadius:'50%', backgroundColor:'#F84F4F',color:'#ffffff', textAlign:'center', display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedPriority.length}</Typography>
+                </Box> 
+                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
 
             </Box>
 
@@ -529,6 +555,7 @@ function LeftSideBar() {
                 backgroundColor: '#F9F9F9'
                 },
                 '&.active': {
+                color: '#0058FF',
                 backgroundColor: '#FFFFFF',
                 '& > :last-child': {
                     content: '"..."'
@@ -536,7 +563,6 @@ function LeftSideBar() {
                 }
             }}
             className={activeButton === 'Status'? 'active' : ''}
-            // onClick={() => handleButtonClick('Status')}
             onClick={handleClickS}
             >
 
@@ -546,7 +572,11 @@ function LeftSideBar() {
             </Box>
             <Box sx={{width:'20%',display:'flex',alignItems:'center', justifyContent:'center'}}>
 
-                {(activeButton === 'Status') ? <MoreHorizOutlinedIcon sx={{height:'16px', width:'16px', color:'#474747'}}/> : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
+                {(activeButton === 'Status') ? 
+                <Box sx={{height:'20px',width: '20px', borderRadius:'50%', backgroundColor:'#F84F4F',color:'#ffffff', textAlign:'center', display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <Typography sx={{fontSize:'14PX', fontFamily:'Montserrat'}}>{selectedStatus.length}</Typography>
+                </Box>  
+                : <Typography sx={{fontSize: '14px', fontFamily:'Montserrat'}}>7</Typography>}
 
             </Box>
 
@@ -629,40 +659,27 @@ function LeftSideBar() {
         <Menu
         id="simple-menu"
         anchorElA={anchorElA}
-        keepMounted
+        // keepMounted
         open={Boolean(anchorElA)}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
         sx={{
-            // maxWidth:'205px',
-            // width:'205px',
+            left: 300,
+            top:-80,
+            
           '& .MuiMenu-paper': {
-            right: 830,
-            left: 'auto !important',
+            boxShadow: '0px 0px 6px #00000029',
+            borderRadius: '5px',
+            backgroundColor: '#F9F9F9'
           },
-          
-        //   position: 'absolute',
-        //   top: '50%',
-        //   right: 830,
-        //   transform: 'translateY(-50%)',
         }}
       >
-       {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10 }}>
-    <ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} />
-  </Box> */}
         {associates.map((associate) => (
           <MenuItem key={associate.id}
-           sx={{display:'flex', flexDirection:'row', gap:1,fontSize:'14px',fontFamily:'Montserrat'}}>
+           sx={{display:'flex', flexDirection:'row', gap:1, fontSize:'14px',fontFamily:'Montserrat'}}>
             <Checkbox
-              checked={selectedAssociates[associate.name]}
-              onChange={() => handleSelectA(associate.name)}
+              checked={selectedAssociates.includes(associate.id)}
+              onChange={(event) => handleCheckboxChangeA(event, associate.id)}
+             
             />
             <img
                   src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&d=mp&r=g"
@@ -680,37 +697,29 @@ function LeftSideBar() {
         keepMounted
         open={Boolean(anchorElT)}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
         sx={{
-            // maxWidth:'205px',
-            // width:'205px',
+            
+            width: '205px',
+            left: 300,
+            top: 'calc(30% + 1px)',
+            position: 'absolute',
+            right: 'auto !important',
+            transition: 'visibility 0s linear 25ms,z-index 0s linear 25ms,opacity 334ms cubic-bezier(0,0,.2,1),25ms',
+            visibility: 'visible',
+            
           '& .MuiMenu-paper': {
-            right: 830,
-            left: 'auto !important',
+            boxShadow: '0px 0px 6px #00000029',
+            borderRadius: '5px',
           },
           
-        //   position: 'absolute',
-        //   top: '50%',
-        //   right: 830,
-        //   transform: 'translateY(-50%)',
         }}
       >
-       {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10 }}>
-    <ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} />
-  </Box> */}
         {tags.map((tags) => (
           <MenuItem key={tags.id}
            sx={{display:'flex', flexDirection:'row', gap:1,fontSize:'14px',fontFamily:'Montserrat'}}>
             <Checkbox
-              checked={selectedAssociates[tags.name]}
-              onChange={() => handleSelectT(tags.name)}
+              checked={selectedTags.includes(tags.id)}
+              onChange={(event) => handleCheckboxChangeT(event, tags.id)}
             />
             <img
                   src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&d=mp&r=g"
@@ -729,37 +738,33 @@ function LeftSideBar() {
         keepMounted
         open={Boolean(anchorElP)}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
         sx={{
-            // maxWidth:'205px',
-            // width:'205px',
+           
+            width: '205px',
+           
+            left: 300,
+            top: 'calc(30% + 1px)',
+           
+            position: 'absolute',
+            right: 'auto !important',
+            transition: 'visibility 0s linear 25ms,z-index 0s linear 25ms,opacity 334ms cubic-bezier(0,0,.2,1),25ms',
+            visibility: 'visible',
+            
           '& .MuiMenu-paper': {
-            right: 830,
-            left: 'auto !important',
+            boxShadow: '0px 0px 6px #00000029',
+            borderRadius: '5px',
           },
           
-        //   position: 'absolute',
-        //   top: '50%',
-        //   right: 830,
-        //   transform: 'translateY(-50%)',
+        
         }}
       >
-       {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10 }}>
-    <ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} />
-  </Box> */}
+     
         {priority.map((priority) => (
           <MenuItem key={priority.id}
            sx={{display:'flex', flexDirection:'row', gap:1,fontSize:'14px',fontFamily:'Montserrat'}}>
             <Checkbox
-              checked={selectedAssociates[priority.name]}
-              onChange={() => handleSelectP(priority.name)}
+              checked={selectedPriority.includes(priority.id)}
+              onChange={(event) => handleCheckboxChangeP(event, priority.id)}
             />
             <img
                   src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&d=mp&r=g"
@@ -778,37 +783,31 @@ function LeftSideBar() {
         keepMounted
         open={Boolean(anchorElS)}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
+       
         sx={{
-            // maxWidth:'205px',
-            // width:'205px',
+        
+            width: '205px',
+           
+            left: 300,
+            top: 'calc(30% + 1px)',
+           
+            position: 'absolute',
+            right: 'auto !important',
+            transition: 'visibility 0s linear 25ms,z-index 0s linear 25ms,opacity 334ms cubic-bezier(0,0,.2,1),25ms',
+            visibility: 'visible',
+            
           '& .MuiMenu-paper': {
-            right: 830,
-            left: 'auto !important',
+            boxShadow: '0px 0px 6px #00000029',
+            borderRadius: '5px',
           },
-          
-        //   position: 'absolute',
-        //   top: '50%',
-        //   right: 830,
-        //   transform: 'translateY(-50%)',
         }}
       >
-       {/* <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10 }}>
-    <ArrowLeftOutlinedIcon sx={{ fontSize: 20, color: '#474747' }} />
-  </Box> */}
         {status.map((status) => (
           <MenuItem key={status.id}
            sx={{display:'flex', flexDirection:'row', gap:1,fontSize:'14px',fontFamily:'Montserrat'}}>
             <Checkbox
-              checked={selectedAssociates[status.name]}
-              onChange={() => handleSelectS(status.name)}
+              checked={selectedStatus.includes(status.id)}
+              onChange={(event) => handleCheckboxChangeS(event, status.id)}
             />
             <img
                   src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200&d=mp&r=g"
@@ -830,12 +829,14 @@ function LeftSideBar() {
         },
       }}
       sx={{
-            // maxWidth:'205px',
-            // width:'205px',
+            left: 250,
+            top: 'calc(10% + 1px)',
+           
+            position: 'absolute',
+            right: 'auto !important',
+            transition: 'visibility 0s linear 25ms,z-index 0s linear 25ms,opacity 334ms cubic-bezier(0,0,.2,1),25ms',
+            visibility: 'visible',
           '& .MuiDialog-paper': {
-            right: 190,
-            top: 30,
-            left: 'auto !important',
             boxShadow:'none',
             minWidth:'398px', maxWidth:'398px', minHeight:'257px', maxHeight:'257px', padding:'10px 15px',display: 'flex', flexDirection:'column',gap: 2, border: '1px solid #9F9F9F', borderRadius:'5px', alignItems:'center',justifyContent:'center'
           },}}
@@ -845,7 +846,6 @@ function LeftSideBar() {
           boxShadow: 'none', borderRadius:'5px'}}>
           <Box sx={{display:'flex', flexDirection:'column', gap: '11px'}}>
           <Typography sx={{fontSize: '14px', fontFamily:'Montserrat', color:'#474747'}}> Campaign / Project Name </Typography>
-          {/* <TextField sx={{border: 0, height:'40px'}} id="filled-basic" label="Type Campaign Name" variant="filled" /> */}
           <Box sx={{backgroundColor: '#F3F3F3',
                     opacity: '100%',
                     padding:1}}>
@@ -862,7 +862,6 @@ function LeftSideBar() {
                     color: '#474747',
                     padding: '0px',
                     fontFamily:'Montserrat'
-                    // opacity: 0.54,
                   }}
                   
                 />
@@ -881,7 +880,7 @@ function LeftSideBar() {
                   onChange={handleRoleChange}
                   input={<OutlinedInput label="Select Company (Internal by default)" />}
                   renderValue={(selected) => selected.join(', ')}
-                  // MenuProps={MenuProps}
+               
                 >
                   {roles.map((role) => (
                     <MenuItem sx={{padding:"3px"}} key={role} value={role}>

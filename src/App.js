@@ -1,6 +1,7 @@
 import './App.css';
 import ButtonPopup from './ButtonPopup';
 import CampaignList from './CampaignList';
+import FilterSelect from './FilterSelect';
 import LeftSideBar from './LeftSideBar';
 import LoginPage from './LoginPage';
 import MyTeam from './MyTeam';
