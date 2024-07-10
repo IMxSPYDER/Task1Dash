@@ -136,6 +136,7 @@ function LeftSideBar() {
   const handleCheckboxChangeT = (event, tagsId) => {
     if (event.target.checked) {
       setSelectedTags([...selectedTags, tagsId]);
+      
     } else {
       setSelectedTags(
         selectedTags.filter((id) => id !== tagsId),

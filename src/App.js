@@ -5,17 +5,22 @@ import FilterSelect from './FilterSelect';
 import LeftSideBar from './LeftSideBar';
 import LoginPage from './LoginPage';
 import MyTeam from './MyTeam';
+import UploadFile from './UploadFile';
+import Time from './Time';
+
 import User from './User';
+import SidebarItem from './sirfile/index';
+
+
 
 function App() {
   return (
     <div className="App">
-      {/* <CampaignList/> */}
-      <LeftSideBar/>
-      {/* <MyTeam/> */}
-      
+     
+      <UploadFile/>
     </div>
   );
 }
 
 export default App;
+
