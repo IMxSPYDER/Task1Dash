@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@azure/msal-browser": "^3.18.0",
+    "@azure/msal-react": "^2.0.20",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/montserrat": "^5.0.18",
@@ -23,6 +24,7 @@
     "jszip": "^3.10.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-dropbox-chooser": "^0.0.5",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.52.0",
     "react-perfect-scrollbar": "^1.5.8",

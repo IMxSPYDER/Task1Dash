@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
@@ -10,6 +10,7 @@ import SystemUpdateAltRoundedIcon from '@mui/icons-material/SystemUpdateAltRound
 import CloudDownloadOutlinedIcon from '@mui/icons-material/CloudDownloadOutlined';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import './File.css'
 
 
 const ImageToggle = ({ imageSrc }) => {
@@ -63,9 +64,13 @@ const ImageToggle = ({ imageSrc }) => {
     <Box onClick={handleClick} style={{ cursor: 'pointer' }} sx={{fontFamily: 'Montserrat',p:5, widht: '100%', height: 'auto', backgroundColor:'#F9F9F9', border: '1px dashed #707070', borderRadius:'5px',display:'flex', flexDirection:'column', gap: 3}}>
     
 
-      <Box  sx ={{widht: '100%', height: 'auto', display:'flex', flexDirection:'column', alignItems:'center',justifyContent: 'center', gap: 3}} className={`dropzone ${files.length > 0 ? 'row' : ''}`}>
+      <Box  sx ={{widht: '100%', height: 'auto', display: 'flex',
+          flexDirection: files.length > 0 ? 'row' : 'column',
+          alignItems: files.length > 0 ? 'center' : 'center',
+          justifyContent: files.length > 0 ? 'space-between' : 'center',
+          gap: 4}} >
         
-        <Box {...getRootProps()} sx={{display:'flex', flexDirection:'column', alignItems:'center',justifyContent: 'center', gap: 3}}>
+        <Box {...getRootProps()} sx={{display:'flex', flexDirection:'column', alignItems: files.length > 0 ? 'flex-start' : 'center', textAlign: files.length > 0 ? 'left' : 'center',justifyContent: 'center', gap: 3}}>
         <input {...getInputProps()} />
         <Box sx={{width:'182px', display:'flex',flexDirection:'row', alignItems:'center', justifyContent:'center', gap: 2, border: '1px solid #707070' ,borderRadius: '5px', fontFamily:'Montserrat' ,color:'#707070', fontSize:'12px', p:0, m: 0}}>
             <BackupOutlinedIcon/>
@@ -74,7 +79,7 @@ const ImageToggle = ({ imageSrc }) => {
         <Box sx={{letterspacing:'0px', color: '#6A6A6A', fontSize: '10px'}}>Click or drag file to this area to upload from local drive</Box>
         </Box>
 
-        <Box sx={{display:'flex', flexDirection:'row', alignItems:'center',justifyContent: 'center', gap: 8, marginTop:'3px'}}>
+        <Box sx={{display:'flex', flexDirection:'row', alignItems:'center',justifyContent: 'center', gap: 6, marginTop:'3px'}}>
 
             <Box sx={{display:'flex', flexDirection:'column', alignItems:'center',justifyContent: 'center', fontSize:'12px', fontWeight:'500'}}>
                 <img src={Drive} alt='Google' style={{height:'50px', widht:'50px'}}/>
@@ -97,21 +102,24 @@ const ImageToggle = ({ imageSrc }) => {
       </Box>
       {files.length > 0 && (
         <div className="attachments">
-          <h3 style={{fontSize: '12px', color:'#6A6A6A'}}>Attachments</h3>
-          <ul className={`attachments-list ${files.length > 3 ? 'two-columns' : ''}`}>
-            {files.map(file => (
-              <li key={file.name}>
-                <Box sx={{display:'flex', flexDirection:'column',gap: 0}}>
-                    <p style={{fontSize:'14px', color:'#131523', margin: 1}}>{file.name}</p>
-                    <p style={{fontSize:'9px', color:'#7E84A3', margin: 1}}>Added on {file.uploadDate}</p>
-                </Box>
-                <Box onClick={() => downloadFile(file)}>
+          <h3 style={{fontSize: '12px', color:'#6A6A6A', textAlign:'left'}}>Attachments</h3>
+          <Grid container spacing={2}>
+            {files.map((file, index) => (
+              <Grid item xs={12} sm={files.length > 3 ? 6 : 12} key={index}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                  <Box sx={{display:'flex', flexDirection:'column',  gap: 0, justifyContent:'center',alignItem:'flex-start', textAlign:'left'}}>
+                    <Typography sx={{fontSize:'14px', color:'#7E84A3'}}>{file.name}</Typography>
+                    <Typography sx={{fontSize:'9px', color:'#7E84A3'}}>Added on {file.uploadDate}</Typography>
+                  </Box>
+                  <Box onClick={() => downloadFile(file)}>
                     <CloudDownloadOutlinedIcon/>
+                  </Box>
+                  
                 </Box>
-              </li>
+              </Grid>
             ))}
-          </ul>
-          <Box onClick={downloadAllFiles} sx={{display:'flex', flexDirection:'row', alignItems:'center',justifyContent:'flex-start',gap:2, width:'250px'}}>
+          </Grid>
+          <Box onClick={downloadAllFiles} sx={{display:'flex', flexDirection:'row', alignItems:'center',justifyContent:'flex-start',gap:2, width:'250px',mt: 1}}>
             <CloudDownloadOutlinedIcon/>
             Download All
           </Box>
