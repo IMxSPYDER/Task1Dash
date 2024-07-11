@@ -19,6 +19,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.12",
+    "dropbox": "^10.34.0",
     "file-saver": "^2.0.5",
     "iconify": "^1.4.0",
     "jszip": "^3.10.1",
