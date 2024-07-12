@@ -12,7 +12,7 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import DropboxChooser from "react-dropbox-chooser";
 
-const APP_KEY = "z3ns9zvjpdn136u";
+const APP_KEY_DROPBOX = "z3ns9zvjpdn136u";
 
 const ImageToggle = ({ imageSrc }) => {
   const [isActive, setIsActive] = useState(false);
@@ -73,7 +73,7 @@ const ImageToggle = ({ imageSrc }) => {
     <Box sx={{ width: "776px", margin: "auto" }}>
       <Box
         onClick={handleClick}
-        style={{ cursor: "pointer" }}
+        // style={{ cursor: "pointer" }}
         sx={{
           fontFamily: "Montserrat",
           p: 5,
@@ -107,6 +107,7 @@ const ImageToggle = ({ imageSrc }) => {
               textAlign: files.length > 0 ? "left" : "center",
               justifyContent: "center",
               gap: 3,
+              cursor: "pointer",
             }}
           >
             <input {...getInputProps()} />
@@ -118,7 +119,7 @@ const ImageToggle = ({ imageSrc }) => {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 2,
-                border: "1px solid #707070",
+                border: "1px dashed #707070",
                 borderRadius: "5px",
                 fontFamily: "Montserrat",
                 color: "#707070",
@@ -155,6 +156,7 @@ const ImageToggle = ({ imageSrc }) => {
                 justifyContent: "center",
                 fontSize: "12px",
                 fontWeight: "500",
+                cursor: "pointer"
               }}
             >
               <img
@@ -166,7 +168,7 @@ const ImageToggle = ({ imageSrc }) => {
             </Box>
 
             <DropboxChooser
-              appKey={APP_KEY}
+              appKey={APP_KEY_DROPBOX}
               success={handleSuccess}
               cancel={() => console.log("Cancel")}
               multiselect={true}
@@ -188,6 +190,7 @@ const ImageToggle = ({ imageSrc }) => {
                   justifyContent: "center",
                   fontSize: "12px",
                   fontWeight: "500",
+                  cursor: "pointer"
                 }}
               >
                 <img
@@ -207,6 +210,7 @@ const ImageToggle = ({ imageSrc }) => {
                 justifyContent: "center",
                 fontSize: "12px",
                 fontWeight: "500",
+                cursor: "pointer"
               }}
             >
               <img
@@ -224,6 +228,7 @@ const ImageToggle = ({ imageSrc }) => {
                 justifyContent: "center",
                 fontSize: "12px",
                 fontWeight: "500",
+                cursor: "pointer"
               }}
             >
               <img
@@ -270,7 +275,7 @@ const ImageToggle = ({ imageSrc }) => {
                         Added on {file.uploadDate}
                       </Typography>
                     </Box>
-                    <Box onClick={() => downloadFile(file)}>
+                    <Box sx={{cursor: "pointer"}} onClick={() => downloadFile(file)}>
                       <CloudDownloadOutlinedIcon />
                     </Box>
                   </Box>
@@ -287,6 +292,7 @@ const ImageToggle = ({ imageSrc }) => {
                 gap: 2,
                 width: "250px",
                 mt: 1,
+                cursor: "pointer"
               }}
             >
               <CloudDownloadOutlinedIcon />
