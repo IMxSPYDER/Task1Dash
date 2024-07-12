@@ -21,7 +21,7 @@ const APP_KEY_DROPBOX = "z3ns9zvjpdn136u";
 
 
 
-const ImageToggle = ({ imageSrc }) => {
+const NewUploadFile = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -710,4 +710,4 @@ const ImageToggle = ({ imageSrc }) => {
   );
 };
 
-export default ImageToggle;
+export default NewUploadFile;
