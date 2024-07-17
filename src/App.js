@@ -1,6 +1,9 @@
 import './App.css';
 
 import NewUploadFile from './NewUploadFile';
+import Calender from './calender'
+import Cal from './Cal'
+
 
 
 
@@ -10,7 +13,11 @@ function App() {
      
      
 
-      <NewUploadFile/>
+      {/* <NewUploadFile/> */}
+      {/* <Calender/> */}
+
+      <Cal/>
+
     
     </div>
   );
